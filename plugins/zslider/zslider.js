@@ -20,6 +20,8 @@
     var isToLeft; //记录向左滑动还是向右滑动
     var currentBanner; //手指当前banner
     //var bannerLi = $(".z_slider_li");
+    var globalTimer; //全局定时器
+    var currentTimer = 0; //当前定时器指针
 
     $.fn.zSlider = function(userOptions){
         //确保options不为空
@@ -70,7 +72,7 @@
         });
 
         //显示控制条
-        if(options.hasControl){
+        if(options.hasControl || false){
 
             var _controlP = document.createElement("ul");
             _controlP.className = "z_slider_nav";
@@ -116,6 +118,26 @@
         }
 
         //定时自动滑动
+        if(options.autoPlay && true){
+            (function(c, l){
+                globalTimer = setInterval(function(){
+                    zTranslate3d(self, 0 - c * screenWidthNum);
+
+                    //处理nav
+                    $($(".z_slider_li")[c]).addClass("currentNav");
+                    $($(".z_slider_li")[c]).siblings().removeClass("currentNav");
+
+                    if(c < l - 1){
+                        c += 1;
+                    } else if(c === l - 1){
+                        //重置
+                        c = 0;
+                    }
+
+                }, options.speed || 3000);
+
+            }(currentTimer, options.bannerList.length));
+        }
 
         //绑定触摸事件流
         self.on("touchstart", function(event){ zTouchHandlerStart(event) });
@@ -128,14 +150,23 @@
     //手指开始放到屏幕上
     function zTouchHandlerStart(e){
 
+        //清除定时器
+        //clearInterval(globalTimer);
+
         e.preventDefault();
+
+        //保证只有一个触点
+        if(e.targetTouches.length > 1 || e.touches.length > 1){
+            return;
+        }
 
         if(e.target.nodeName = "img"){
             currentBanner = e.target;
             currentBannerIndex = parseInt($(currentBanner).attr("data-banner-index"));
 
             //保存初始值
-            originX = e.touches[0].screenX;
+            originX = e.targetTouches[e.targetTouches.length - 1].screenX;
+
         }
 
     }
@@ -145,22 +176,34 @@
 
         e.preventDefault();
 
+        //清除转场动画
+        self.css({
+            "-webkit-transition": ""
+        });
+
         //左滑还是右滑用于离开时做响应
-        if(e.touches[0].screenX > originX){
+        if(e.changedTouches[e.changedTouches.length - 1].screenX > originX){
             isToLeft = false;
-        } else if(e.touches[0].screenX < originX){
+        } else if(e.changedTouches[e.changedTouches.length - 1].screenX < originX){
             isToLeft =  true;
         }
 
-        if(isToLeft){
-            if(currentBannerIndex !== options.bannerList.length - 1){
-                zTranslate3d(self, (0 - currentBannerIndex * screenWidthNum) + (e.touches[0].screenX - originX));
+
+        //是否开启拖拽
+        if(options.dragEnable){
+
+            if(isToLeft){
+                if(currentBannerIndex !== options.bannerList.length - 1){
+                    zTranslate3d(self, (0 - currentBannerIndex * screenWidthNum) + (e.targetTouches[0].screenX - originX));
+                }
+            } else {
+                if(currentBannerIndex !== 0 ){
+                    zTranslate3d(self, (0 - currentBannerIndex * screenWidthNum) + (e.targetTouches[0].screenX - originX));
+                }
             }
-        } else {
-            if(currentBannerIndex !== 0 ){
-                zTranslate3d(self, (0 - currentBannerIndex * screenWidthNum) + (e.touches[0].screenX - originX));
-            }
+
         }
+
 
     }
 
@@ -169,6 +212,11 @@
     function zTouchHandlerEnd(e){
 
         e.preventDefault();
+
+        if(e.changedTouches[0].screenX === originX){
+            //这是一次tap事件
+            return;
+        }
 
         if(isToLeft){
             if(currentBannerIndex !== options.bannerList.length - 1){

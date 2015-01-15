@@ -4,9 +4,17 @@ body,ul,li,img{
     padding:0;
 }
 
+body{
+    background: #f0f0f0;
+}
+
 /*box*/
 *{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    outline: none !important;
+    -webkit-touch-callout: none !important;
+    -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+    -webkit-user-select: none !important;
 }
