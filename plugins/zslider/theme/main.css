@@ -9,11 +9,11 @@
     overflow: auto;
 
     /*动画效果*/
-    -webkit-transition: transform 0.4s;
-    -moz-transition: transform 0.4s;
-    -ms-transition: transform 0.4s;
-    -o-transition: transform 0.4s;
-    transition: transform 0.4s;
+    /*-webkit-transition: transform 0.4s;*/
+    /*-moz-transition: transform 0.4s;*/
+    /*-ms-transition: transform 0.4s;*/
+    /*-o-transition: transform 0.4s;*/
+    /*transition: transform 0.4s;*/
 
     -webkit-transform: translate3d(0,0,0);
     -moz-transform: translate3d(0,0,0);

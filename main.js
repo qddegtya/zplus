@@ -7,13 +7,13 @@
 
     $("#z_slider").zSlider({
         "bannerList": [
-            "http://zcimg.zcool.com.cn/zcimg/e16554adfc5d32f8751b6aecc3f9",
-            "http://zcimg.zcool.com.cn/zcimg/4a9854b55b966ac72248bc979b34",
-            "http://zcimg.zcool.com.cn/zcimg/0ef454b55c7a6ac72248bc02dc62"
+            "http://xmsj.qiniudn.com/mobile/index/banner/1420253131197.png",
+            "http://xmsj.qiniudn.com/mobile/index/banner/1415961765773.png",
+            "http://xmsj.qiniudn.com/mobile/index/banner/1416028453279.png"
         ],
         "dragEnable": true,
         "speed": 3000,
-        "autoPlay": true
+        "autoPlay": false
     });
 
 }(Zepto));

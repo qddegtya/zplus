@@ -155,6 +155,15 @@
         //清除定时器
         //clearInterval(globalTimer);
 
+        //加入转场动画
+        self.css({
+            "-webkit-transition": "transform 0.4s",
+            "-moz-transition": "transform 0.4s",
+            "-ms-transition": "transform 0.4s",
+            "-o-transition": "transform 0.4s",
+            "transition": "transform 0.4s"
+        });
+
         e.preventDefault();
 
         //保证只有一个触点
@@ -162,7 +171,9 @@
             return;
         }
 
-        if(e.target.nodeName === "img"){
+        //判断tagName
+        if(e.target.tagName.toLowerCase() === "img"){
+
             currentBanner = e.target;
             currentBannerIndex = parseInt($(currentBanner).attr("data-banner-index"));
 
@@ -215,6 +226,15 @@
 
         e.preventDefault();
 
+        //加入动画
+        self.css({
+            "-webkit-transition": "transform 0.4s",
+            "-moz-transition": "transform 0.4s",
+            "-ms-transition": "transform 0.4s",
+            "-o-transition": "transform 0.4s",
+            "transition": "transform 0.4s"
+        });
+
         if(e.changedTouches[0].screenX === originX){
             //这是一次tap事件
             return;
@@ -251,6 +271,5 @@
             //"-ms-transform": "translate3d(" + offset + "px, 0, 0)"
         });
     }
-
 
 }(Zepto));
