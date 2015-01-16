@@ -6,6 +6,8 @@
 
 (function($){
 
+    'use strict';
+
     //检查插件环境
     if(typeof Zepto === "undefined") { throw new Error("请引入zepto"); }
 
@@ -140,9 +142,9 @@
         }
 
         //绑定触摸事件流
-        self.on("touchstart", function(event){ zTouchHandlerStart(event) });
-        self.on("touchmove", function(event){ zTouchHandlerMove(event) });
-        self.on("touchend", function(event){ zTouchHandlerEnd(event) });
+        self.on("touchstart", function(event){ zTouchHandlerStart(event); });
+        self.on("touchmove", function(event){ zTouchHandlerMove(event); });
+        self.on("touchend", function(event){ zTouchHandlerEnd(event); });
 
     };
 
@@ -160,7 +162,7 @@
             return;
         }
 
-        if(e.target.nodeName = "img"){
+        if(e.target.nodeName === "img"){
             currentBanner = e.target;
             currentBannerIndex = parseInt($(currentBanner).attr("data-banner-index"));
 
