@@ -108,6 +108,15 @@
                 var _m = parseInt($(this).attr("data-nav-index"));
                 var _transOffset = 0 - (_m * screenWidthNum);
 
+                //加入动画
+                self.css({
+                    "-webkit-transition": "transform 0.4s",
+                    "-moz-transition": "transform 0.4s",
+                    "-ms-transition": "transform 0.4s",
+                    "-o-transition": "transform 0.4s",
+                    "transition": "transform 0.4s"
+                });
+
                 //处理3d滑动
                 zTranslate3d(self, _transOffset);
 
@@ -122,6 +131,16 @@
         //定时自动滑动
         if(options.autoPlay && true){
             (function(c, l){
+
+                //加入动画
+                self.css({
+                    "-webkit-transition": "transform 0.4s",
+                    "-moz-transition": "transform 0.4s",
+                    "-ms-transition": "transform 0.4s",
+                    "-o-transition": "transform 0.4s",
+                    "transition": "transform 0.4s"
+                });
+
                 globalTimer = setInterval(function(){
                     zTranslate3d(self, 0 - c * screenWidthNum);
 
@@ -155,15 +174,6 @@
         //清除定时器
         //clearInterval(globalTimer);
 
-        //加入转场动画
-        self.css({
-            "-webkit-transition": "transform 0.4s",
-            "-moz-transition": "transform 0.4s",
-            "-ms-transition": "transform 0.4s",
-            "-o-transition": "transform 0.4s",
-            "transition": "transform 0.4s"
-        });
-
         e.preventDefault();
 
         //保证只有一个触点
@@ -172,7 +182,7 @@
         }
 
         //判断tagName
-        if(e.target.tagName.toLowerCase() === "img"){
+        //if(e.target.tagName.toLowerCase() === "img"){
 
             currentBanner = e.target;
             currentBannerIndex = parseInt($(currentBanner).attr("data-banner-index"));
@@ -180,7 +190,7 @@
             //保存初始值
             originX = e.targetTouches[e.targetTouches.length - 1].screenX;
 
-        }
+        //}
 
     }
 

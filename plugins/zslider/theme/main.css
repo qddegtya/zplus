@@ -63,7 +63,7 @@
     float: left;
     list-style: none;
     display: block;
-    background: #2f2f2f;
+    background: #cccccc;
     height: 8px;
 }
 .z_slider_li:hover{
@@ -71,5 +71,5 @@
     cursor: pointer;
 }
 .currentNav{
-    background: #27ae60 !important;
+    background: #f1c40f !important;
 }
