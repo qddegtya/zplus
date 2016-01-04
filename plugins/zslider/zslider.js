@@ -1,7 +1,6 @@
 /**
  * Created by archer on 15/1/9.
- * zslider
- * 用于移动端的Banner滑动组件
+ * zSlider
  */
 
 (function($){
