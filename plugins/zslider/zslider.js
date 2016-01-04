@@ -215,7 +215,7 @@
     }
 
 
-    //手指离开屏幕时的响应
+    // 手指离开屏幕时的响应
     function zTouchHandlerEnd(e){
 
         e.preventDefault();
